@@ -7,10 +7,10 @@ import java.net.URL;
 
 public class NetClientNeighbor {
 
-	public String getNumsNeightbor(String ip) {
+	public String getNumsNeightbor(String ip, String ListNeighborsCosult) {
 		String json = "";
 		try {
-			URL url = new URL("http://" + ip + ":8080/RestNumbers/api/numbers");
+			URL url = new URL("http://" + ip + ":8080/RestNumbers/api/numbers?neighbors=" + ListNeighborsCosult);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
