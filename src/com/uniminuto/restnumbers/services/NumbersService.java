@@ -121,4 +121,25 @@ public class NumbersService {
 		return Response.serverError().build();
 
 	}
+	@GET
+	@Path("/sum")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response sum() {
+		try {
+		String ip;
+		final DatagramSocket socket = new DatagramSocket();
+		socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+		ip = socket.getLocalAddress().getHostAddress();
+		socket.close();
+		NetClientNeighbor client = new NetClientNeighbor();
+		ArrayList<String> neighborsRequest = new ArrayList<>();
+		neighborsRequest.add(ip);
+		String response = client.getNumsNeightbor(ip, new Gson().toJson(neighborsRequest));
+		System.out.println(response);
+		return Response.ok(response).build();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 }
